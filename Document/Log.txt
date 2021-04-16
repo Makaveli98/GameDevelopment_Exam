@@ -1,0 +1,36 @@
+Log:
+
+Dinsdag 13/04:
+
+- klant gesprek gehad
+- feedback op GDD
+- op internet gezocht naar game assets
+- verder niks gedaan
+
+Woensdag 14/04
+
+- verder gegaan met zoeken naar game assets, zoals
+  de map, wapens, etc dus materiaal om mee te werken
+
+- de player en de movement gemaakt, dus dat de
+  gameobject kan bewegen, springen, hurken en rondkijken
+  doormiddelen met de muis.
+
+- ook heb ik er voor gezorgd dat je de muis kan locken
+  en unlocken zodat je de muis niet ziet wanneer je rond
+  wilt kijken.
+
+- last but not least de player sound. Als de player beweegt
+  hoor je voetstappen. De audio heb ik van internet.
+
+- ik heb dit allemaal proberen te pushen op github maar
+  er blijkt een probleem te zijn en dat moet ik nog onderzoeken
+  dus tot nu toe is er niks gepusht.
+
+- omdat ik vandaag tot de avond bezig ben geweest probeer ik het pushen
+  morgen weer opnieuw
+
+Donderdag 15/05
+
+- omdat gister het pushen niet gelukt is probeer ik het nu weer.
+
