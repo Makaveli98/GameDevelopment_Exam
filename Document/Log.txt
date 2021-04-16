@@ -1,5 +1,6 @@
 Log:
 
+(dag 1)
 Dinsdag 13/04:
 
 - klant gesprek gehad
@@ -7,6 +8,7 @@ Dinsdag 13/04:
 - op internet gezocht naar game assets
 - verder niks gedaan
 
+(dag 2)
 Woensdag 14/04
 
 - verder gegaan met zoeken naar game assets, zoals
@@ -29,11 +31,13 @@ Woensdag 14/04
 - omdat ik vandaag tot de avond bezig ben geweest probeer ik het pushen
   morgen weer opnieuw
 
+(dag 3)
 Donderdag 15/04
 
 - omdat gister het pushen niet gelukt is probeer ik het nu weer.
 - verder niks gedaan
 
+(dag 4)
 Vrijdag 16/04
 
 - vandaag de error gefixt om te kunnen pushen maar dat bracht nog veel meer
