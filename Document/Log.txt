@@ -12,13 +12,12 @@ Woensdag 14/04
 - verder gegaan met zoeken naar game assets, zoals
   de map, wapens, etc dus materiaal om mee te werken
 
-- de player en de movement gemaakt, dus dat de
+- de playermovement gemaakt, dus dat de
   gameobject kan bewegen, springen, hurken en rondkijken
-  doormiddelen met de muis.
+  doormiddelen met de muis en keyboard
 
 - ook heb ik er voor gezorgd dat je de muis kan locken
-  en unlocken zodat je de muis niet ziet wanneer je rond
-  wilt kijken.
+  en unlocken zodat je de muis niet ziet wanneer je speelt
 
 - last but not least de player sound. Als de player beweegt
   hoor je voetstappen. De audio heb ik van internet.
@@ -30,7 +29,20 @@ Woensdag 14/04
 - omdat ik vandaag tot de avond bezig ben geweest probeer ik het pushen
   morgen weer opnieuw
 
-Donderdag 15/05
+Donderdag 15/04
 
 - omdat gister het pushen niet gelukt is probeer ik het nu weer.
+- verder niks gedaan
+
+Vrijdag 16/04
+
+- vandaag de error gefixt om te kunnen pushen maar dat bracht nog veel meer
+problemen op. Alles waar ik aan heb gewerkt tot nu toe werkt niet meer. Nu
+is het zo dat er errors op unity verschijnen met dat de scripts niet
+geladen kunnen worden.
+- heb het probleem proberen te fixen. Heb er uren aan gewerkt maar helaas
+niks kunne laten werken. Na het weekend weer proberen.
+
+
+
 
