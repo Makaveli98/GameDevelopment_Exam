@@ -184,7 +184,4 @@ public class EnemyController : MonoBehaviour {
 
     } // Random Destination
 
-
-    
-
-}
+} // class
