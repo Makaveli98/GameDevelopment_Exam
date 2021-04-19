@@ -17,7 +17,22 @@ public class MouseAxis {
 
 public class Tags {
 
-    public const string ENEMY = "Enemy";
+    public const string ENEMY = "Enemy"; 
     public const string PLAYER = "Player";
+
+}
+
+public class AnimationTags {
+
+    public const string ZOOM_IN = "Zoom_In"; // animation Base Layer tag
+    public const string ZOOM_OUT = "Zoom_Out"; // animation Base Layer tag
+
+    public const string SPEED = "Speed"; // animation Parameters tag
+
+    public const string WALK_FLOAT = "Walk"; // animation Base Layer tag
+    public const string RUN_FLOAT = "Run"; // animation Base Layer tag
+    public const string SHOOT_TRIGGER = "Shoot"; // animation Base Layer tag
+    public const string RELOAD_BOOL = "Reload"; // animation Base Layer tag
+
 
 }
