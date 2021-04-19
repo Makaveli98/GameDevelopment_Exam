@@ -41,11 +41,13 @@ Donderdag 15/04
 Vrijdag 16/04
 
 - vandaag de error gefixt om te kunnen pushen maar dat bracht nog veel meer
-problemen op. Alles waar ik aan heb gewerkt tot nu toe werkt niet meer. Nu
-is het zo dat er errors op unity verschijnen met dat de scripts niet
-geladen kunnen worden.
-- heb het probleem proberen te fixen. Heb er uren aan gewerkt maar helaas
+problemen op.
+- heb het probleem proberen te fixen maar helaas
 niks kunne laten werken. Na het weekend weer proberen.
+
+zondag 18/04
+- het probleem dat ik voor de weekend had is gefixt.
+- nog gewerkt aan de animatie en de script voor de wapens
 
 
 
