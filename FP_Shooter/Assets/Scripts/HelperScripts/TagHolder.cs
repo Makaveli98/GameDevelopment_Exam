@@ -31,8 +31,8 @@ public class AnimationTags {
 
     public const string WALK_FLOAT = "Walk"; // animation Base Layer tag
     public const string RUN_FLOAT = "Run"; // animation Base Layer tag
-    public const string SHOOT_TRIGGER = "Shoot"; // animation Base Layer tag
-    public const string RELOAD_BOOL = "Reload"; // animation Base Layer tag
-
+    public const string SHOOT_TRIGGER = "Shoot"; // animation Paraneter tag
+    public const string RELOAD_BOOL = "Reload"; // animation Paraneter tag
+    public const string ATTACK = "Attack"; // animation Parameter tag
 
 }

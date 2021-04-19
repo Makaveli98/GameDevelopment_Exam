@@ -22,6 +22,12 @@ public class WeaponHandler : MonoBehaviour {
     private Animator anim;
 
     [SerializeField]
+    private Animation animation;
+    
+    [SerializeField]
+    private AnimationClip[] animation_Clips;
+
+    [SerializeField]
     private AudioSource shoot_Sound, reload_Sound;
 
     [SerializeField]
@@ -45,6 +51,15 @@ public class WeaponHandler : MonoBehaviour {
 
     void Play_ShootAnimation() {
         anim.SetTrigger(AnimationTags.SHOOT_TRIGGER);
+    }
+
+    void Play_AttackAnimation() {
+        anim.SetTrigger(AnimationTags.ATTACK);
+    }
+
+    void Play_RandomAttackAnimation() {
+        animation.clip = animation_Clips[Random.Range(0, animation_Clips.Length)];
+        anim.SetTrigger(AnimationTags.ATTACK);
     }
 
     void Play_ReloadAnimation(bool can_Reload) {
