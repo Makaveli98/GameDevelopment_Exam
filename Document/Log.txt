@@ -40,10 +40,10 @@ Donderdag 15/04
 (dag 4)
 Vrijdag 16/04
 
-- vandaag de error gefixt om te kunnen pushen maar dat bracht nog veel meer
+- vandaag de error gefixt om te kunnen pushen maar dat bracht nog meer
 problemen op.
 - heb het probleem proberen te fixen maar helaas
-niks kunne laten werken. Na het weekend weer proberen.
+niks kunnen laten werken. Na het weekend weer proberen.
 
 zondag 18/04
 - het probleem dat ik voor de weekend had is gefixt.
