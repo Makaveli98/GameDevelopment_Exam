@@ -21,7 +21,12 @@ public class WeaponHandler : MonoBehaviour {
     
     private Animator anim;
 
-    private Animator zoom_Camera;
+    private Animator assaultRifle_Cam;
+    private Animator SMG_Cam;
+    private Animator Crossbow_Cam;
+    private Animator Handgun_Cam;
+    private Animator Shotgun_Cam;
+    private Animator snipertRifle_Cam;
 
     // private Animation animation;
     
@@ -34,6 +39,9 @@ public class WeaponHandler : MonoBehaviour {
     [SerializeField]
     private GameObject muzzle_Flash, attack_Point;
 
+    private PlayerMovement player_Move_Script;
+    private PlayerSprintAndCrouch sprint_Crouch_Script;
+
     public WeaponAim weapon_Aim;
     public WeaponFireType weapon_Fire_Type;
     public WeaponBulletType weapon_Bullet_Type;
@@ -41,13 +49,28 @@ public class WeaponHandler : MonoBehaviour {
     private int walk_Speed = 10;
     private int run_Speed = 20;
     private int crouch_Speed = 6;
-    private int no_Speed = 0;
+    private int zero = 0;
+    private int walk_Aim = 5;
+    private int crouch_Aim = 3;
+
+    private float crouch_Aim_Speed = 3f;
+    private float walk_Aim_Speed = 5f;
 
 
     void Awake() {
         anim = GetComponent<Animator>();
         shoot_Sound = GetComponent<AudioSource>();
-        zoom_Camera = GameObject.Find("Assault Rifle Camera").GetComponent<Animator>();
+
+        player_Move_Script = GetComponentInParent<PlayerMovement>();
+        sprint_Crouch_Script = GetComponentInParent<PlayerSprintAndCrouch>();
+
+        assaultRifle_Cam = GameObject.Find("Assault Rifle Camera").GetComponent<Animator>();
+        SMG_Cam = GameObject.Find("SMG Camera").GetComponent<Animator>();
+        Crossbow_Cam = GameObject.Find("Crossbow Camera").GetComponent<Animator>();
+        Handgun_Cam = GameObject.Find("Handgun Camera").GetComponent<Animator>();
+        Shotgun_Cam = GameObject.Find("Shotgun Camera").GetComponent<Animator>();
+        snipertRifle_Cam = GameObject.Find("Sniper Rifle Camera").GetComponent<Animator>();
+
     }
 
     // Animations 
@@ -61,17 +84,27 @@ public class WeaponHandler : MonoBehaviour {
     }
 
     public void PLay_Zoom_InAnimation() {
-        zoom_Camera.Play(AnimationTags.ZOOM_IN);
+        assaultRifle_Cam.Play(AnimationTags.ZOOM_IN);
+        SMG_Cam.Play(AnimationTags.ZOOM_IN);
+        Crossbow_Cam.Play(AnimationTags.ZOOM_IN);
+        Handgun_Cam.Play(AnimationTags.ZOOM_IN);
+        Shotgun_Cam.Play(AnimationTags.ZOOM_IN);
+        snipertRifle_Cam.Play(AnimationTags.ZOOM_IN);
     }
     
     public void PLay_Zoom_OutAnimation() {
-        zoom_Camera.Play(AnimationTags.ZOOM_OUT);
+        assaultRifle_Cam.Play(AnimationTags.ZOOM_OUT);
+        SMG_Cam.Play(AnimationTags.ZOOM_OUT);
+        Crossbow_Cam.Play(AnimationTags.ZOOM_OUT);
+        Handgun_Cam.Play(AnimationTags.ZOOM_OUT);
+        Shotgun_Cam.Play(AnimationTags.ZOOM_OUT);
+        snipertRifle_Cam.Play(AnimationTags.ZOOM_OUT);
     }
 
-    public void Play_RandomAttackAnimation() {
-        animation.clip = animation_Clips[Random.Range(0, animation_Clips.Length)];
-        anim.SetTrigger(AnimationTags.ATTACK);
-    }
+    // public void Play_RandomAttackAnimation() {
+    //     GetComponent<Animation>().clip = animation_Clips[Random.Range(0, animation_Clips.Length)];
+    //     anim.SetTrigger(AnimationTags.ATTACK);
+    // }
 
     public void Play_ReloadAnimation(bool can_Reload) {
         anim.SetBool(AnimationTags.RELOAD_BOOL, can_Reload);
@@ -82,7 +115,7 @@ public class WeaponHandler : MonoBehaviour {
     }
 
     public void Stop_CrouchAnimation() {
-        anim.SetInteger(AnimationTags.SPEED, no_Speed);
+        anim.SetInteger(AnimationTags.SPEED, zero);
     }
 
     public void Play_WalkAnimation() {
@@ -90,7 +123,7 @@ public class WeaponHandler : MonoBehaviour {
     }
 
     public void Stop_WalkAnimation() {
-        anim.SetInteger(AnimationTags.SPEED, no_Speed);
+        anim.SetInteger(AnimationTags.SPEED, zero);
     }
 
     public void Play_RunAnimation() {
@@ -98,12 +131,32 @@ public class WeaponHandler : MonoBehaviour {
     }
 
     public void Stop_RunAnimation() {
-        anim.SetInteger(AnimationTags.SPEED, no_Speed);
+        anim.SetInteger(AnimationTags.SPEED, zero);
     }
 
     public void Play_IdleAnimation(bool can_Aim) {
         anim.SetBool(AnimationTags.IDLE, can_Aim);
 
+    }
+
+    public void Play_AimWalk_Animation( ) {
+        anim.SetInteger(AnimationTags.SPEED, walk_Aim);
+        player_Move_Script.speed = walk_Aim_Speed;
+    }
+
+    public void Stop_AimWalk_Animation() {
+        anim.SetInteger(AnimationTags.SPEED, zero);
+        player_Move_Script.speed = sprint_Crouch_Script.move_Speed;
+    }
+
+    public void Play_AimCrouch_Animation() {
+        anim.SetInteger(AnimationTags.SPEED, crouch_Aim);
+        player_Move_Script.speed = crouch_Aim_Speed;
+    }
+    
+    public void Stop_AimCrouch_Animation() {
+        anim.SetInteger(AnimationTags.SPEED, zero);
+        player_Move_Script.speed = sprint_Crouch_Script.crouch_Speed;
     }
 
     // Animations - end

@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour {
     private PlayerFootsteps player_Footsteps;
     private WeaponManager weapon_Manager;
     private PlayerSprintAndCrouch sprint_Crouch;
+    private PlayerAttack player_Attack;
 
 
     [HideInInspector]
@@ -21,6 +22,7 @@ public class PlayerMovement : MonoBehaviour {
     public float jump_Force = 10f;
     [SerializeField]
     private float vertical_Velocity;
+    public bool is_Walking;
 
     void Awake() {
 
@@ -28,12 +30,13 @@ public class PlayerMovement : MonoBehaviour {
         player_Footsteps = GetComponentInChildren<PlayerFootsteps>();
         weapon_Manager = GetComponent<WeaponManager>();
         sprint_Crouch = GetComponent<PlayerSprintAndCrouch>();
+        player_Attack = GetComponent<PlayerAttack>();
         
     }
 
     void Update() {
-
         MoveThePlayer();
+        CheckIfWalking();
     }
 
     void MoveThePlayer() {
@@ -45,24 +48,37 @@ public class PlayerMovement : MonoBehaviour {
         ApllyGravity();  // applies gravity
         
         character_Controller.Move(move_Direction); // and this will make the gameobject actually move
+
     
         // if move then play WALK anim
-        if (character_Controller.velocity.sqrMagnitude > 0) {
+        if (is_Walking) {
             weapon_Manager.GetCurrentSelectedWeapon().Play_WalkAnimation();
         // if not move then play IDLE anim
-        } else if (character_Controller.velocity.sqrMagnitude <= 0) {
-            weapon_Manager.GetCurrentSelectedWeapon().Stop_WalkAnimation();            
-        }
+        } else if (!is_Walking) {
+            weapon_Manager.GetCurrentSelectedWeapon().Stop_WalkAnimation();    
+
+        } // walk anim
 
         // if move and crouching then play CROUCH anim
-        if (character_Controller.velocity.sqrMagnitude > 0 && sprint_Crouch.is_Crouching) {
+        if (is_Walking && sprint_Crouch.is_Crouching) {
             weapon_Manager.GetCurrentSelectedWeapon().Play_CrouchAnimation();
-        } 
+        } // crouch anim
 
-        // if move and sprinting then play SPRINT anim
-        if (character_Controller.velocity.sqrMagnitude > 0 && sprint_Crouch.is_Sprinting) {
+        // if move and sprinting then play RUN anim
+        if (is_Walking && sprint_Crouch.is_Sprinting) {
             weapon_Manager.GetCurrentSelectedWeapon().Play_RunAnimation();
-        } 
+
+        } // run anim
+
+        if (is_Walking && player_Attack.is_Aiming && !sprint_Crouch.is_Crouching) {
+            weapon_Manager.GetCurrentSelectedWeapon().Play_AimWalk_Animation();
+        }
+
+        if (is_Walking && player_Attack.is_Aiming && sprint_Crouch.is_Crouching) {
+            weapon_Manager.GetCurrentSelectedWeapon().Play_AimCrouch_Animation();
+            
+        }
+
 
     } // move player
 
@@ -90,6 +106,15 @@ public class PlayerMovement : MonoBehaviour {
                 player_Footsteps.Player_Fall_Sound();
             }
         }
+    }
+
+    void CheckIfWalking() {
+        if (character_Controller.velocity.sqrMagnitude >= 3) {
+            is_Walking = true;
+        } else if (character_Controller.velocity.sqrMagnitude < 3) {
+            is_Walking = false;
+        }
+
     }
 
 } // class
