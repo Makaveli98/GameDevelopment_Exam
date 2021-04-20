@@ -27,6 +27,7 @@ public class WeaponManager : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Alpha3)) {
             TurnOn_SelectedWeapon(2);
+            GetCurrentSelectedWeapon().Play_IdleAnimation(true);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha4)) {

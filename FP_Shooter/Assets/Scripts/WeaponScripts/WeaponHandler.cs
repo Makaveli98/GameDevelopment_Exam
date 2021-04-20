@@ -21,11 +21,12 @@ public class WeaponHandler : MonoBehaviour {
     
     private Animator anim;
 
-    [SerializeField]
-    private Animation animation;
+    private Animator zoom_Camera;
+
+    // private Animation animation;
     
-    [SerializeField]
-    private AnimationClip[] animation_Clips;
+    // [SerializeField]
+    // private AnimationClip[] animation_Clips;
 
     [SerializeField]
     private AudioSource shoot_Sound, reload_Sound;
@@ -40,42 +41,69 @@ public class WeaponHandler : MonoBehaviour {
     private int walk_Speed = 10;
     private int run_Speed = 20;
     private int crouch_Speed = 6;
+    private int no_Speed = 0;
 
 
     void Awake() {
         anim = GetComponent<Animator>();
         shoot_Sound = GetComponent<AudioSource>();
+        zoom_Camera = GameObject.Find("Assault Rifle Camera").GetComponent<Animator>();
     }
 
     // Animations 
 
-    void Play_ShootAnimation() {
+    public void Play_ShootAnimation() {
         anim.SetTrigger(AnimationTags.SHOOT_TRIGGER);
     }
 
-    void Play_AttackAnimation() {
+    public void Play_AttackAnimation() {
         anim.SetTrigger(AnimationTags.ATTACK);
     }
 
-    void Play_RandomAttackAnimation() {
+    public void PLay_Zoom_InAnimation() {
+        zoom_Camera.Play(AnimationTags.ZOOM_IN);
+    }
+    
+    public void PLay_Zoom_OutAnimation() {
+        zoom_Camera.Play(AnimationTags.ZOOM_OUT);
+    }
+
+    public void Play_RandomAttackAnimation() {
         animation.clip = animation_Clips[Random.Range(0, animation_Clips.Length)];
         anim.SetTrigger(AnimationTags.ATTACK);
     }
 
-    void Play_ReloadAnimation(bool can_Reload) {
+    public void Play_ReloadAnimation(bool can_Reload) {
         anim.SetBool(AnimationTags.RELOAD_BOOL, can_Reload);
     }
 
-    void Play_CrouchAnimation() {
+    public void Play_CrouchAnimation() {
         anim.SetInteger(AnimationTags.SPEED, crouch_Speed);
     }
 
-    void Play_WalkAnimation() {
+    public void Stop_CrouchAnimation() {
+        anim.SetInteger(AnimationTags.SPEED, no_Speed);
+    }
+
+    public void Play_WalkAnimation() {
         anim.SetInteger(AnimationTags.SPEED, walk_Speed);
     }
 
-    void Play_RunAnimation() {
+    public void Stop_WalkAnimation() {
+        anim.SetInteger(AnimationTags.SPEED, no_Speed);
+    }
+
+    public void Play_RunAnimation() {
         anim.SetInteger(AnimationTags.SPEED, run_Speed);
+    }
+
+    public void Stop_RunAnimation() {
+        anim.SetInteger(AnimationTags.SPEED, no_Speed);
+    }
+
+    public void Play_IdleAnimation(bool can_Aim) {
+        anim.SetBool(AnimationTags.IDLE, can_Aim);
+
     }
 
     // Animations - end
