@@ -28,9 +28,6 @@ Woensdag 14/04
   er blijkt een probleem te zijn en dat moet ik nog onderzoeken
   dus tot nu toe is er niks gepusht.
 
-- omdat ik vandaag tot de avond bezig ben geweest probeer ik het pushen
-  morgen weer opnieuw
-
 (dag 3)
 Donderdag 15/04
 
@@ -45,10 +42,20 @@ problemen op.
 - heb het probleem proberen te fixen maar helaas
 niks kunnen laten werken. Na het weekend weer proberen.
 
+(dag 6)
 zondag 18/04
 - het probleem dat ik voor de weekend had is gefixt.
 - nog gewerkt aan de animatie en de script voor de wapens
 
+(dag 7)
+maandag 19/04
+- verder gewerkt aan de animatie. Onder andere de walk, run en crouch,
+aim animatie. 
+- de walk, run en crouch animatie op alle wapens werkend gekregen.
+- zoom in en zoom out animatie gemaakt
+- nieuwe functie gemaakt voor idle animatie. 
+- inzoomen en idle animatie samen werkend gekregen
+- het inzoomen werkt nog maar op 1 wapen
 
 
 
