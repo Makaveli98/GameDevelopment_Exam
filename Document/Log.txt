@@ -44,11 +44,13 @@ niks kunnen laten werken. Na het weekend weer proberen.
 
 (dag 6)
 zondag 18/04
+
 - het probleem dat ik voor de weekend had is gefixt.
 - nog gewerkt aan de animatie en de script voor de wapens
 
 (dag 7)
 maandag 19/04
+
 - verder gewerkt aan de animatie. Onder andere de walk, run en crouch,
 aim animatie. 
 - de walk, run en crouch animatie op alle wapens werkend gekregen.
@@ -56,6 +58,15 @@ aim animatie.
 - nieuwe functie gemaakt voor idle animatie. 
 - inzoomen en idle animatie samen werkend gekregen
 - het inzoomen werkt nog maar op 1 wapen
+
+(dag 8)
+dinsdag 20/04
+
+- verder aan de player animatie gewerkt. Veel aangepast. De animaties werken nu prima en overlappen elkaar goed
+- ook wat veranderd aan de player movement. Heb onder andere een functie gemaakt die checkt of
+de player springt en beweegt.
+- ook wat aanpassing gemaakt voor de wapens. Ik heb het inzoomen aangepast voor de wapens.
+- de codes wat netter gemaakt
 
 
 
