@@ -73,16 +73,22 @@ public class WeaponHandler : MonoBehaviour {
 
     }
 
-    // Animations 
+    // ANIMATION 
 
+    // play animation
+
+
+    // shoot
     public void Play_ShootAnimation() {
         anim.SetTrigger(AnimationTags.SHOOT_TRIGGER);
     }
 
+    // attack
     public void Play_AttackAnimation() {
         anim.SetTrigger(AnimationTags.ATTACK);
     }
-
+    
+    // zoom in
     public void PLay_Zoom_InAnimation() {
         assaultRifle_Cam.Play(AnimationTags.ZOOM_IN);
         SMG_Cam.Play(AnimationTags.ZOOM_IN);
@@ -91,7 +97,8 @@ public class WeaponHandler : MonoBehaviour {
         Shotgun_Cam.Play(AnimationTags.ZOOM_IN);
         snipertRifle_Cam.Play(AnimationTags.ZOOM_IN);
     }
-    
+
+    // zoom out
     public void PLay_Zoom_OutAnimation() {
         assaultRifle_Cam.Play(AnimationTags.ZOOM_OUT);
         SMG_Cam.Play(AnimationTags.ZOOM_OUT);
@@ -106,37 +113,32 @@ public class WeaponHandler : MonoBehaviour {
     //     anim.SetTrigger(AnimationTags.ATTACK);
     // }
 
+    // reload
     public void Play_ReloadAnimation(bool can_Reload) {
         anim.SetBool(AnimationTags.RELOAD_BOOL, can_Reload);
     }
-
-    public void Play_CrouchAnimation() {
-        anim.SetInteger(AnimationTags.SPEED, crouch_Speed);
-    }
-
-    public void Stop_CrouchAnimation() {
-        anim.SetInteger(AnimationTags.SPEED, zero);
-    }
-
-    public void Play_WalkAnimation() {
-        anim.SetInteger(AnimationTags.SPEED, walk_Speed);
-    }
-
-    public void Stop_WalkAnimation() {
-        anim.SetInteger(AnimationTags.SPEED, zero);
-    }
-
-    public void Play_RunAnimation() {
-        anim.SetInteger(AnimationTags.SPEED, run_Speed);
-    }
-
-    public void Stop_RunAnimation() {
-        anim.SetInteger(AnimationTags.SPEED, zero);
-    }
-
+    
+    // idle
     public void Play_IdleAnimation(bool can_Aim) {
         anim.SetBool(AnimationTags.IDLE, can_Aim);
 
+    }
+    
+
+    // crouch 
+    public void Play_CrouchAnimation() {
+        anim.SetInteger(AnimationTags.SPEED, crouch_Speed);
+    }
+    public void Play_AimCrouch_Animation() {
+        anim.SetInteger(AnimationTags.SPEED, crouch_Aim);
+        player_Move_Script.speed = crouch_Aim_Speed;
+    }
+
+
+    // walk 
+
+    public void Play_WalkAnimation() {
+        anim.SetInteger(AnimationTags.SPEED, walk_Speed);
     }
 
     public void Play_AimWalk_Animation( ) {
@@ -144,19 +146,40 @@ public class WeaponHandler : MonoBehaviour {
         player_Move_Script.speed = walk_Aim_Speed;
     }
 
+    // run 
+
+    public void Play_RunAnimation() {
+        anim.SetInteger(AnimationTags.SPEED, run_Speed);
+    }
+
+
+    // stop animation
+
+    // crouch
+    public void Stop_CrouchAnimation() {
+        anim.SetInteger(AnimationTags.SPEED, zero);
+    }
+
+    public void Stop_AimCrouch_Animation() {
+        anim.SetInteger(AnimationTags.SPEED, zero);
+        player_Move_Script.speed = sprint_Crouch_Script.crouch_Speed;
+    }
+
+
+    // walk
+    public void Stop_WalkAnimation() {
+        anim.SetInteger(AnimationTags.SPEED, zero);
+    }
+
     public void Stop_AimWalk_Animation() {
         anim.SetInteger(AnimationTags.SPEED, zero);
         player_Move_Script.speed = sprint_Crouch_Script.move_Speed;
     }
-
-    public void Play_AimCrouch_Animation() {
-        anim.SetInteger(AnimationTags.SPEED, crouch_Aim);
-        player_Move_Script.speed = crouch_Aim_Speed;
-    }
     
-    public void Stop_AimCrouch_Animation() {
+
+    // run
+    public void Stop_RunAnimation() {
         anim.SetInteger(AnimationTags.SPEED, zero);
-        player_Move_Script.speed = sprint_Crouch_Script.crouch_Speed;
     }
 
     // Animations - end

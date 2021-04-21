@@ -18,11 +18,16 @@ public class PlayerMovement : MonoBehaviour {
 
     public float speed = 10f;
     private float gravity = 20f;
-
-    public float jump_Force = 10f;
+    private float jump_Force = 10f;
+    // private float crouch_jump_Force = 7.5f;
     [SerializeField]
     private float vertical_Velocity;
+    [SerializeField]
     public bool is_Walking;
+    [SerializeField]
+    private bool is_Jumping;
+    
+
 
     void Awake() {
 
@@ -37,6 +42,7 @@ public class PlayerMovement : MonoBehaviour {
     void Update() {
         MoveThePlayer();
         CheckIfWalking();
+        CheckIfJumping();
     }
 
     void MoveThePlayer() {
@@ -49,36 +55,54 @@ public class PlayerMovement : MonoBehaviour {
         
         character_Controller.Move(move_Direction); // and this will make the gameobject actually move
 
-    
-        // if move then play WALK anim
-        if (is_Walking) {
-            weapon_Manager.GetCurrentSelectedWeapon().Play_WalkAnimation();
-        // if not move then play IDLE anim
-        } else if (!is_Walking) {
-            weapon_Manager.GetCurrentSelectedWeapon().Stop_WalkAnimation();    
 
-        } // walk anim
-
-        // if move and crouching then play CROUCH anim
-        if (is_Walking && sprint_Crouch.is_Crouching) {
-            weapon_Manager.GetCurrentSelectedWeapon().Play_CrouchAnimation();
-        } // crouch anim
-
-        // if move and sprinting then play RUN anim
-        if (is_Walking && sprint_Crouch.is_Sprinting) {
-            weapon_Manager.GetCurrentSelectedWeapon().Play_RunAnimation();
-
-        } // run anim
-
-        if (is_Walking && player_Attack.is_Aiming && !sprint_Crouch.is_Crouching) {
-            weapon_Manager.GetCurrentSelectedWeapon().Play_AimWalk_Animation();
+        // if not jumping
+        if (!is_Jumping) {
+            // then check if is walking
+            if (is_Walking) {
+                // play walk anim
+                weapon_Manager.GetCurrentSelectedWeapon().Play_WalkAnimation();
+            } else {
+                // stop walk anim
+                weapon_Manager.GetCurrentSelectedWeapon().Stop_WalkAnimation();
+            }
         }
 
-        if (is_Walking && player_Attack.is_Aiming && sprint_Crouch.is_Crouching) {
-            weapon_Manager.GetCurrentSelectedWeapon().Play_AimCrouch_Animation();
-            
+        // if not jumping
+        if (!is_Jumping) {
+            // then check if is walking
+            if (is_Walking && sprint_Crouch.is_Crouching) {
+                // play crouch anim
+                weapon_Manager.GetCurrentSelectedWeapon().Play_CrouchAnimation();
+            } 
         }
 
+        // if not jumping
+        if (!is_Jumping) {
+            // then check if is walking
+            if (is_Walking && sprint_Crouch.is_Sprinting) {
+                // play run anim
+                weapon_Manager.GetCurrentSelectedWeapon().Play_RunAnimation();
+            }
+        }
+
+        // if not jumping
+        if (!is_Jumping) {
+            // then check if is walking
+            if (is_Walking && player_Attack.is_Aiming && !sprint_Crouch.is_Crouching) {
+                // play aim_walk anim
+                weapon_Manager.GetCurrentSelectedWeapon().Play_AimWalk_Animation();
+            }
+        }
+
+        // if not jumping
+        if (!is_Jumping) {
+            // then check if is walking
+            if (is_Walking && player_Attack.is_Aiming && sprint_Crouch.is_Crouching) {
+                // play aim_crouch anim
+                weapon_Manager.GetCurrentSelectedWeapon().Play_AimCrouch_Animation();
+            }
+        }
 
     } // move player
 
@@ -94,17 +118,48 @@ public class PlayerMovement : MonoBehaviour {
     }  // apply gravity
 
     void PlayerJump() {
-        
-        if (character_Controller.isGrounded && Input.GetKeyDown(KeyCode.Space)) {
-            vertical_Velocity = jump_Force;
+        if (!is_Jumping) {
+            if (character_Controller.isGrounded && Input.GetKeyDown(KeyCode.Space)) {
+                vertical_Velocity = jump_Force;
 
-            if (character_Controller.velocity.sqrMagnitude <= 0) {
-                weapon_Manager.GetCurrentSelectedWeapon().Stop_WalkAnimation();            
-            }
+                // weapon_Manager.GetCurrentSelectedWeapon().Stop_WalkAnimation();
+                // weapon_Manager.GetCurrentSelectedWeapon().Stop_AimWalk_Animation();
 
-            if (character_Controller.isGrounded) { 
-                player_Footsteps.Player_Fall_Sound();
+                // weapon_Manager.GetCurrentSelectedWeapon().Stop_CrouchAnimation();
+                // weapon_Manager.GetCurrentSelectedWeapon().Stop_AimCrouch_Animation();
+
+                // weapon_Manager.GetCurrentSelectedWeapon().Stop_RunAnimation();
+                // weapon_Manager.GetCurrentSelectedWeapon().Play_IdleAnimation(false);
+
+                is_Jumping = false;
+            } 
+
+            if (is_Jumping || character_Controller.isGrounded) {
+                if (Input.GetKeyUp(KeyCode.Space)) {
+                    weapon_Manager.GetCurrentSelectedWeapon().Play_IdleAnimation(true);
+                }
+                
             }
+            // else if (character_Controller.isGrounded && Input.GetKeyDown(KeyCode.Space) && sprint_Crouch.is_Crouching) {
+
+            //     jump_Force = crouch_jump_Force;
+            //     vertical_Velocity = jump_Force;
+
+            //     is_Jumping = false;
+            // }
+
+            // if (character_Controller.isGrounded) { 
+            //     player_Footsteps.Player_Fall_Sound();
+            // }
+        }
+    }
+
+    void CheckIfJumping() {
+        if (vertical_Velocity > 0) {
+            is_Jumping = true;
+            is_Walking = false;
+        } else if (vertical_Velocity <= 0) {
+            is_Jumping = false;
         }
     }
 

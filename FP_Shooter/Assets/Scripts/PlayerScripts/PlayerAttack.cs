@@ -33,25 +33,6 @@ public class PlayerAttack : MonoBehaviour {
                     weapon_Manager.GetCurrentSelectedWeapon().PLay_Zoom_InAnimation();
                     weapon_Manager.GetCurrentSelectedWeapon().Play_IdleAnimation(false);
                     is_Aiming = true;
-
-
-                    // if mouse button is being pressed
-                    // that means if camera is zoomed in
-                    // then check if player is moving and crouching
-                    // only then play the crouch_aim animation
-                    if (sprint_Crouch_Script.is_Crouching) {
-                        weapon_Manager.GetCurrentSelectedWeapon().Play_AimCrouch_Animation(); 
-
-                    } // check for crouch
-
-
-                
-                    // the same with crouch but now with walk
-                    if (!sprint_Crouch_Script.is_Crouching) {
-                        weapon_Manager.GetCurrentSelectedWeapon().Play_AimWalk_Animation();
-
-                    } // check for walk
-
                 }
 
             } // if mouse button being pressed
@@ -66,7 +47,9 @@ public class PlayerAttack : MonoBehaviour {
                     // that means the camera is zoomed out
                     // then check if player is moving and crouching
                     // then stop the aim_crouch animation and play the normal crouch animation
-                    if (sprint_Crouch_Script.is_Crouching && player_Movement_Script.is_Walking || !player_Movement_Script.is_Walking) {
+                    if (sprint_Crouch_Script.is_Crouching && player_Movement_Script.is_Walking || 
+                        !player_Movement_Script.is_Walking && sprint_Crouch_Script.is_Crouching) {
+                            
                         weapon_Manager.GetCurrentSelectedWeapon().Stop_AimCrouch_Animation(); 
 
                     } // check for crouch

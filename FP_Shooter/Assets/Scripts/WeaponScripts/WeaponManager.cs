@@ -27,7 +27,6 @@ public class WeaponManager : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Alpha3)) {
             TurnOn_SelectedWeapon(2);
-            GetCurrentSelectedWeapon().Play_IdleAnimation(true);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha4)) {
@@ -65,6 +64,9 @@ public class WeaponManager : MonoBehaviour {
 
         // store the current selected index
         current_Weapon_Index = weaponIndex;
+
+        GetCurrentSelectedWeapon().Play_IdleAnimation(true);
+
 
     } 
 
