@@ -31,6 +31,10 @@ public class EnemyAnimator : MonoBehaviour {
         z_Anim.SetBool(AnimationTags.ZOMBIE_DEAD, is_Dead);
     }
     
+    // public void Play_Zombie_DeadAnimation2(bool is_Dead2) {
+    //     z_Anim.SetBool(AnimationTags.ZOMBIE_DEAD_2, is_Dead2);
+    // }
+    
     
     // stop animation
     public void Stop_Zombie_WalkAnimation() {

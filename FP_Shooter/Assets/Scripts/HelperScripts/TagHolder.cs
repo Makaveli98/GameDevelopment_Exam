@@ -39,5 +39,6 @@ public class AnimationTags {
 
     public const string ZOMBIE_SPEED = "Zombie_speed"; // animation Parameter tag
     public const string ZOMBIE_ATTACK = "Zombie_attack"; // animation Parameter tag
-    public const string ZOMBIE_DEAD = "Zombie_dead"; // animation Parameter tag
+    public const string ZOMBIE_DEAD = "Zombie_dead_back"; // animation Parameter tag
+    // public const string ZOMBIE_DEAD_2 = "Zombie_dead_forward"; // animation Parameter tag
 }

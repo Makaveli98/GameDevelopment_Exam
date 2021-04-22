@@ -10,8 +10,8 @@ public enum EnemyState {
 }
 
 public class EnemyController : MonoBehaviour {
-
-    private NavMeshAgent navAgent;
+    [HideInInspector]
+    public NavMeshAgent navAgent;
     private EnemyState enemy_State;
     private EnemyAnimator z_Animator;
     private Transform target;

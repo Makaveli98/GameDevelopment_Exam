@@ -33,7 +33,8 @@ public class WeaponHandler : MonoBehaviour {
     private AudioSource shoot_Sound, reload_Sound;
 
     [SerializeField]
-    private GameObject muzzle_Flash, attack_Point, bullet;
+    private GameObject muzzle_Flash, attack_Point;
+    public GameObject bullet;
 
     private PlayerMovement player_Move_Script;
     private PlayerSprintAndCrouch sprint_Crouch_Script;
@@ -45,9 +46,8 @@ public class WeaponHandler : MonoBehaviour {
     private int walk_Condition = 10, run_Condition = 20, crouch_Condition = 6, zero = 0;
     private int crouch_Aim_Condition = 3, walk_Aim_Condition = 5;
     private float crouch_Aim_Speed = 1.5f, walk_Aim_Speed = 3f;
-    public float range;
-    public float max_Ammo;
-    
+    public float range, max_Ammo;
+    public int damage;
 
     void Awake() {
         anim = GetComponent<Animator>();
