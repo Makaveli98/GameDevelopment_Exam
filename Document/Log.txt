@@ -68,5 +68,11 @@ de player springt en beweegt.
 - ook wat aanpassing gemaakt voor de wapens. Ik heb het inzoomen aangepast voor de wapens.
 - de codes wat netter gemaakt
 
+(dag 9)
+woensdag 21/04
+
+- gewerkt aan de enemy animatie. Enemy kan nu lopen, rennen en aanvallen.
+- een script gemaakt om te kunnen schieten en reloaden.
+- een nog een script gemaakt om aan te kunnen vallen met andere wapens.
 
 
