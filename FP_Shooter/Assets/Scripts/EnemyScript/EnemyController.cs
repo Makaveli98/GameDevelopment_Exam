@@ -13,30 +13,27 @@ public class EnemyController : MonoBehaviour {
 
     private NavMeshAgent navAgent;
     private EnemyState enemy_State;
-
+    private EnemyAnimator z_Animator;
     private Transform target;
 
-    private float patrol_Speed = 0.5f;
-    private float run_Speed = 4f;
+    private float patrol_Speed = 0.5f, run_Speed = 4f;
 
-    private float chase_Distance = 7f;
-    private float current_Chase_Distance;
+    private float chase_Distance = 15f, current_Chase_Distance;
+    
+    private float attack_Timer, wait_Before_Attack = 0.7f;
 
-    private float attack_Timer;
-    private float wait_Before_Attack = 1f;
-
-    private float attack_Distance = 1.8f;
-    private float chase_AfterAttack_Distance = 2.2f;
+    private float attack_Distance = 1.8f, AfterAttack_Distance = 2.2f;
     
     private float min_Patrol_Radius = 20f, max_Patrol_Radius = 60f;
 
-    private float patrol_Timer;
-    private float patrol_For_This_Time = 15f;
+    private float patrol_Timer, patrol_For_This_Time = 15f;
 
     void Awake() {
         navAgent = GetComponent<NavMeshAgent>();
         target = GameObject.FindWithTag(Tags.PLAYER).transform;
+        z_Animator = GetComponent<EnemyAnimator>();
     }
+    
 
     void Start() {
         // puts the enemy in patrol mode
@@ -71,7 +68,9 @@ public class EnemyController : MonoBehaviour {
         navAgent.speed = patrol_Speed;
 
         patrol_Timer += Time.deltaTime;
-
+        
+        // only if the patrol timer is greater than patrol for this time
+        // execute the code
         if (patrol_Timer > patrol_For_This_Time) {
             SetNewRandomDestination();
             
@@ -79,6 +78,11 @@ public class EnemyController : MonoBehaviour {
         }
 
         // play walk animation
+        if (navAgent.velocity.sqrMagnitude > 0) {
+            z_Animator.Play_Zombie_WalkAnimation();   
+        } else {
+            z_Animator.Stop_Zombie_WalkAnimation();
+        }
         
         // checks the distance between the enemy and player AND if its equel or lesser than the chase distance
         if (Vector3.Distance(transform.position, target.position) <= chase_Distance) {
@@ -101,28 +105,39 @@ public class EnemyController : MonoBehaviour {
         navAgent.SetDestination(target.position);
 
         // play run animation
+        if (navAgent.velocity.sqrMagnitude > 0) {
+            z_Animator.Play_Zombie_RunAnimation();   
+        } else {
+            z_Animator.Stop_Zombie_RunAnimation();
+        }
 
-        // checks if the distance between the enemy and the target is equel or lesser than attack_Distance
-        // ONLY  then will the enemy attack
+        // checks if the distance between the enemy and the target is equel or less than attack_Distance
+        // IF less than Attack Distance then enemy go in attack state
         if (Vector3.Distance(transform.position, target.position) <= attack_Distance) {
             // stop walk and run animation
+            z_Animator.Stop_Zombie_RunAnimation();
+            z_Animator.Stop_Zombie_WalkAnimation();
 
-            // puts the enemy in attack mode
+            // puts the enemy in attack state
             enemy_State = EnemyState.ATTACK;
             
             // resets the chase distance
             if (chase_Distance != current_Chase_Distance) {
                 chase_Distance = current_Chase_Distance;
             }
-          
-          // else if the distance between the enemy and the player is greater than the chase distance
+
+          // ELSE IF greater than Chase Distance
           // THEN put the enemy back to patrol mode otherwise the enemy can chase you forever
         } else if (Vector3.Distance(transform.position, target.position) > chase_Distance) {
             // stop run animation
+            z_Animator.Stop_Zombie_RunAnimation();
 
-            // reset to patrol mode
+            // THEN reset to patrol mode
             enemy_State = EnemyState.PATROL;
+
             // reset the patrol timer too
+            // because the patrol timer is still increasing
+            // that means the enemy will go straight to patrol mode but we dont want that
             patrol_Timer = patrol_For_This_Time;
 
             // resets the chase distance because enemy is now patrolling
@@ -142,11 +157,13 @@ public class EnemyController : MonoBehaviour {
 
         attack_Timer += Time.deltaTime;
 
-        // if the attack timer is greater than wait before attack - attack
+        // only if attack timer is greater than wait before attack
+        // execute the code
         if (attack_Timer > wait_Before_Attack) {
             // play attack animation
+            z_Animator.Play_Zombie_AttackAnimation();
 
-            // resets the attack_Timer otherwise the enemy will attack in for infinite
+            // resets the attack_Timer otherwise the attack animation will loop
             attack_Timer = 0f;
 
             //play attack audio
@@ -154,7 +171,7 @@ public class EnemyController : MonoBehaviour {
             // if the distane between the enemy and player is greater than the attack distance plus the chase distance after attacking
             // THEN put the enemy back to chase distance otherwise the enemy will only attack in 1 place 
             // NOW you actually tell the enemy to move each time after attack if the player is to far away for the attack distance
-            if (Vector3.Distance(transform.position, target.position) > attack_Distance + chase_AfterAttack_Distance) {
+            if (Vector3.Distance(transform.position, target.position) > attack_Distance + AfterAttack_Distance) {
                 enemy_State = EnemyState.CHASE;
             }
         }

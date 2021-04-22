@@ -8,27 +8,20 @@ public class PlayerSprintAndCrouch : MonoBehaviour {
     private WeaponManager weapon_manager;
     private CharacterController char_Controller;
     private PlayerAttack player_Attack;
+    private PlayerFootsteps footsteps_Sound;
 
     [HideInInspector]
-    public float move_Speed = 10f;
-    [HideInInspector]
-    public float crouch_Speed = 6f;
-    [HideInInspector]
-    public float sprint_Speed = 20f;
+    public float move_Speed = 5f, crouch_Speed = 2.5f, sprint_Speed = 10f;
 
     private Transform player_Height;
-    private float crouch_Height = 1f;
-    private float stand_Height = 1.6f;
-    
-    private PlayerFootsteps footsteps_Sound;
-    private float walk_Volume_Min = 0.2f, walk_Volume_Max =  0.6f;
-    private float crouch_Volume = 0.1f;
-    private float sprint_Volume = 1f;
-    private float walk_Step_Distance = 0.4f;
-    private float crouch_Step_Distance = 0.5f;
-    private float sprint_Step_Distance = 0.25f;
+    private float crouch_Height = 1f, stand_Height = 1.6f;
 
-    
+    private float walk_Volume_Min = 0.2f, walk_Volume_Max =  0.6f;
+    private float crouch_Volume = 0.1f, sprint_Volume = 1f;
+   
+    private float walk_Step_Distance = 0.4f, crouch_Step_Distance = 0.5f, sprint_Step_Distance = 0.25f;
+
+    [HideInInspector]
     public bool is_Crouching, is_Sprinting;
 
     void Awake() {

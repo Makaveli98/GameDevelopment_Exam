@@ -28,11 +28,16 @@ public class AnimationTags {
     public const string ZOOM_OUT = "Zoom_Out"; // animation Base Layer tag
 
     public const string SPEED = "Speed"; // animation Parameters tag
+    public const string IDLE = "Idle"; // animation Parameter tag
 
     public const string WALK_FLOAT = "Walk"; // animation Base Layer tag
     public const string RUN_FLOAT = "Run"; // animation Base Layer tag
-    public const string SHOOT_TRIGGER = "Shoot"; // animation Parameter tag
-    public const string RELOAD_BOOL = "Reload"; // animation Parameter tag
+
+    public const string SHOOT = "Shoot"; // animation Parameter tag
+    public const string RELOAD = "Reload"; // animation Parameter tag
     public const string ATTACK = "Attack"; // animation Parameter tag
-    public const string IDLE = "Idle"; // animation Parameter tag
+
+    public const string ZOMBIE_SPEED = "Zombie_speed"; // animation Parameter tag
+    public const string ZOMBIE_ATTACK = "Zombie_attack"; // animation Parameter tag
+    public const string ZOMBIE_DEAD = "Zombie_dead"; // animation Parameter tag
 }

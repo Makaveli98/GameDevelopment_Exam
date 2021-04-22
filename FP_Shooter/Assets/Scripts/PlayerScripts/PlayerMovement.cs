@@ -12,22 +12,19 @@ public class PlayerMovement : MonoBehaviour {
 
 
     [HideInInspector]
-    public Vector3 move_Direction;
+    public Vector3 move_Direction;    
+    public float speed = 5f;
 
-    private Vector3 test_Direction;
-
-    public float speed = 10f;
     private float gravity = 20f;
     private float jump_Force = 10f;
     // private float crouch_jump_Force = 7.5f;
-    [SerializeField]
-    private float vertical_Velocity;
-    [SerializeField]
-    public bool is_Walking;
-    [SerializeField]
-    private bool is_Jumping;
-    
 
+    private float vertical_Velocity;
+
+    [HideInInspector]
+    public bool is_Walking;
+
+    private bool is_Jumping;
 
     void Awake() {
 
@@ -90,7 +87,9 @@ public class PlayerMovement : MonoBehaviour {
         if (!is_Jumping) {
             // then check if is walking
             if (is_Walking && player_Attack.is_Aiming && !sprint_Crouch.is_Crouching) {
-                // play aim_walk anim
+                // set speed to walk_aim speed
+                // there is not really an animation
+                // we just setting the speed to a lower value
                 weapon_Manager.GetCurrentSelectedWeapon().Play_AimWalk_Animation();
             }
         }
@@ -99,7 +98,9 @@ public class PlayerMovement : MonoBehaviour {
         if (!is_Jumping) {
             // then check if is walking
             if (is_Walking && player_Attack.is_Aiming && sprint_Crouch.is_Crouching) {
-                // play aim_crouch anim
+                // set speed to crouch_aim speed
+                // there is not really an animation
+                // we just setting the speed to a lower value
                 weapon_Manager.GetCurrentSelectedWeapon().Play_AimCrouch_Animation();
             }
         }

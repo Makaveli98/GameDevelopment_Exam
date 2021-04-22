@@ -22,11 +22,7 @@ public class WeaponHandler : MonoBehaviour {
     private Animator anim;
 
     private Animator assaultRifle_Cam;
-    private Animator SMG_Cam;
-    private Animator Crossbow_Cam;
-    private Animator Handgun_Cam;
-    private Animator Shotgun_Cam;
-    private Animator snipertRifle_Cam;
+    private Animator SMG_Cam, Crossbow_Cam, Handgun_Cam, Shotgun_Cam, snipertRifle_Cam;
 
     // private Animation animation;
     
@@ -37,7 +33,7 @@ public class WeaponHandler : MonoBehaviour {
     private AudioSource shoot_Sound, reload_Sound;
 
     [SerializeField]
-    private GameObject muzzle_Flash, attack_Point;
+    private GameObject muzzle_Flash, attack_Point, bullet;
 
     private PlayerMovement player_Move_Script;
     private PlayerSprintAndCrouch sprint_Crouch_Script;
@@ -46,16 +42,12 @@ public class WeaponHandler : MonoBehaviour {
     public WeaponFireType weapon_Fire_Type;
     public WeaponBulletType weapon_Bullet_Type;
 
-    private int walk_Speed = 10;
-    private int run_Speed = 20;
-    private int crouch_Speed = 6;
-    private int zero = 0;
-    private int walk_Aim = 5;
-    private int crouch_Aim = 3;
-
-    private float crouch_Aim_Speed = 3f;
-    private float walk_Aim_Speed = 5f;
-
+    private int walk_Condition = 10, run_Condition = 20, crouch_Condition = 6, zero = 0;
+    private int crouch_Aim_Condition = 3, walk_Aim_Condition = 5;
+    private float crouch_Aim_Speed = 1.5f, walk_Aim_Speed = 3f;
+    public float range;
+    public float max_Ammo;
+    
 
     void Awake() {
         anim = GetComponent<Animator>();
@@ -77,10 +69,9 @@ public class WeaponHandler : MonoBehaviour {
 
     // play animation
 
-
     // shoot
     public void Play_ShootAnimation() {
-        anim.SetTrigger(AnimationTags.SHOOT_TRIGGER);
+        anim.SetTrigger(AnimationTags.SHOOT);
     }
 
     // attack
@@ -115,7 +106,7 @@ public class WeaponHandler : MonoBehaviour {
 
     // reload
     public void Play_ReloadAnimation(bool can_Reload) {
-        anim.SetBool(AnimationTags.RELOAD_BOOL, can_Reload);
+        anim.SetBool(AnimationTags.RELOAD, can_Reload);
     }
     
     // idle
@@ -127,10 +118,10 @@ public class WeaponHandler : MonoBehaviour {
 
     // crouch 
     public void Play_CrouchAnimation() {
-        anim.SetInteger(AnimationTags.SPEED, crouch_Speed);
+        anim.SetInteger(AnimationTags.SPEED, crouch_Condition);
     }
     public void Play_AimCrouch_Animation() {
-        anim.SetInteger(AnimationTags.SPEED, crouch_Aim);
+        anim.SetInteger(AnimationTags.SPEED, crouch_Aim_Condition);
         player_Move_Script.speed = crouch_Aim_Speed;
     }
 
@@ -138,18 +129,18 @@ public class WeaponHandler : MonoBehaviour {
     // walk 
 
     public void Play_WalkAnimation() {
-        anim.SetInteger(AnimationTags.SPEED, walk_Speed);
+        anim.SetInteger(AnimationTags.SPEED, walk_Condition);
     }
 
     public void Play_AimWalk_Animation( ) {
-        anim.SetInteger(AnimationTags.SPEED, walk_Aim);
+        anim.SetInteger(AnimationTags.SPEED, walk_Aim_Condition);
         player_Move_Script.speed = walk_Aim_Speed;
     }
 
     // run 
 
     public void Play_RunAnimation() {
-        anim.SetInteger(AnimationTags.SPEED, run_Speed);
+        anim.SetInteger(AnimationTags.SPEED, run_Condition);
     }
 
 
