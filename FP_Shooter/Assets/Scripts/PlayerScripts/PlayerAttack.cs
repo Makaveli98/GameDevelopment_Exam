@@ -118,7 +118,7 @@ public class PlayerAttack : MonoBehaviour {
     void BulletFired() {
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out rayHit, weapon_Manager.GetCurrentSelectedWeapon().range, layer)) {
             Debug.Log("We hitt the" + rayHit.collider.name);
-            rayHit.transform.GetComponent<Health>().ApplyDamage(weapon_Manager.GetCurrentSelectedWeapon().damage);
+            rayHit.transform.GetComponent<EnemyHealth>().ApplyDamage(weapon_Manager.GetCurrentSelectedWeapon().damage);
         }
     }
    

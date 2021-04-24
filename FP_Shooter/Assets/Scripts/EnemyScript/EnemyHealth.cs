@@ -2,16 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Health : MonoBehaviour {
-    [SerializeField]
-    private int current_Health;
+public class EnemyHealth : MonoBehaviour {
+    public int current_Health;
     [SerializeField]
     private int max_Health;
 
     private EnemyAnimator zombie_Anim;
     private EnemyController controller_Script;
-
-    public
 
     void Awake() {
         zombie_Anim = GetComponent<EnemyAnimator>();
