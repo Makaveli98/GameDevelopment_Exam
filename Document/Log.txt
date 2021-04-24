@@ -75,4 +75,24 @@ woensdag 21/04
 - een script gemaakt om te kunnen schieten en reloaden.
 - een nog een script gemaakt om aan te kunnen vallen met andere wapens.
 
+(10)
+donderdag 22/04
+
+- feedback gekregen van klant. De elementen dat de klant erin wilt hebben zitten er nog niet in
+- gewerkt aan een reload functie. Verder gewerkt aan de shooting script.
+- ervoor gezorgt dat de enemy object de "dead" animatie kan afspelen en dat de object niet verder beweegt
+
+(11)
+vrijdag 23/04
+
+- gewerkt aan de enemy counter en wave counter
+
+(12)
+zaterdag 24/04
+
+- gewerkt aan de UI elementen voor de enemy and de wave counter
+- ervoor gezorgt dat er een max wave is en dat er dan geen nieuwe enemies worden gespawned
+- en ook dat de player zelf niet verder kan bewegen en de wapen niet zichtbaar zijn
+- gewerkt aan een script voor een attack point bij de enemy
+
 
