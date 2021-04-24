@@ -36,18 +36,24 @@ public class WeaponHandler : MonoBehaviour {
     private GameObject muzzle_Flash, attack_Point;
     public GameObject bullet;
 
+
     private PlayerMovement player_Move_Script;
     private PlayerSprintAndCrouch sprint_Crouch_Script;
+    private PlayerAttack p_Attack_Script;
+
 
     public WeaponAim weapon_Aim;
     public WeaponFireType weapon_Fire_Type;
     public WeaponBulletType weapon_Bullet_Type;
 
+
     private int walk_Condition = 10, run_Condition = 20, crouch_Condition = 6, zero = 0;
     private int crouch_Aim_Condition = 3, walk_Aim_Condition = 5;
     private float crouch_Aim_Speed = 1.5f, walk_Aim_Speed = 3f;
-    public float range, max_Ammo;
-    public int damage;
+    public int range, damage;
+    
+    [SerializeField]
+    private int current_Ammo, max_Ammo, no_Ammo = 0;
 
     void Awake() {
         anim = GetComponent<Animator>();
@@ -55,6 +61,7 @@ public class WeaponHandler : MonoBehaviour {
 
         player_Move_Script = GetComponentInParent<PlayerMovement>();
         sprint_Crouch_Script = GetComponentInParent<PlayerSprintAndCrouch>();
+        p_Attack_Script = GetComponentInParent<PlayerAttack>();
 
         assaultRifle_Cam = GameObject.Find("Assault Rifle Camera").GetComponent<Animator>();
         SMG_Cam = GameObject.Find("SMG Camera").GetComponent<Animator>();
@@ -62,6 +69,10 @@ public class WeaponHandler : MonoBehaviour {
         Handgun_Cam = GameObject.Find("Handgun Camera").GetComponent<Animator>();
         Shotgun_Cam = GameObject.Find("Shotgun Camera").GetComponent<Animator>();
         snipertRifle_Cam = GameObject.Find("Sniper Rifle Camera").GetComponent<Animator>();
+    }
+
+    void Start() {
+        current_Ammo = max_Ammo;
 
     }
 
@@ -210,5 +221,43 @@ public class WeaponHandler : MonoBehaviour {
     }
 
     // gameobjects - end
+
+    public void Reload() {
+        // if not reloading
+        if (!p_Attack_Script.is_Reloading) {
+            // and is shooting
+            if (p_Attack_Script.is_Shooting) {
+                // then decrease the current ammo
+                current_Ammo --;
+                // if current ammo is less or equel to 0
+                if (current_Ammo <= no_Ammo) {
+                    // then put reloading to true
+                    p_Attack_Script.is_Reloading = true;
+                    Debug.Log("we are reloading");
+                    // play animation
+                    current_Ammo = max_Ammo;
+                    // after reloading put reload to false
+                    p_Attack_Script.is_Reloading = false;
+
+                } else if (current_Ammo < max_Ammo && Input.GetKey(KeyCode.R)) {
+                    p_Attack_Script.is_Reloading = true;
+                    Debug.Log("we are reloading while pressing R and shooting");
+
+                    current_Ammo = max_Ammo;
+
+                    p_Attack_Script.is_Reloading = false;
+                }
+            } else {
+                if (current_Ammo < max_Ammo && Input.GetKey(KeyCode.R)) {
+                    p_Attack_Script.is_Reloading = true;
+                    Debug.Log("we are reloading while pressing R and not shooting");
+
+                    current_Ammo = max_Ammo;
+
+                    p_Attack_Script.is_Reloading = false;
+                }
+            }
+        } 
+    }
 
 } // class
