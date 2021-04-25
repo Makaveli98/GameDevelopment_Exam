@@ -13,19 +13,18 @@ public class GameManager : MonoBehaviour {
     
     [SerializeField]
     private Transform[] spawnPos;
+
+    [SerializeField]
     private TextMeshProUGUI wave_Counter_Text, z_Counter_Text;
     private int z_Amount_ToSpawn = 10, wave_Counter, z_Counter, max_Wave = 2;
 
-
-
     void Awake() {
-        wave_Counter_Text = GetComponentInChildren<TextMeshProUGUI>();
-        z_Counter_Text = GameObject.Find("Zombie Counter").GetComponent<TextMeshProUGUI>();
         player = GameObject.FindGameObjectWithTag(Tags.PLAYER);
     }
 
     void Update() {
         StartCoroutine("WaitBeforeSpawnEnemies");
+        GameOver();
         // connect the int var to the text UI 
         wave_Counter_Text.text = "Wave  " + wave_Counter;
         z_Counter_Text.text = "Zombies  " + z_Counter;
@@ -57,7 +56,6 @@ public class GameManager : MonoBehaviour {
         if (wave_Counter == max_Wave && z_Counter <= 0) {
             StopCoroutine("WaitBeforeSpawnEnemies");
             player.GetComponent<PlayerMovement>().enabled = false;
-            player.GetComponent<WeaponManager>().GetCurrentSelectedWeapon().gameObject.SetActive(false);
             player.GetComponent<PlayerAttack>().enabled = false;
             // player.GetComponent<PlayerSprintAndCrouch>().enabled = false;
             player.GetComponentInChildren<PlayerFootsteps>().enabled = false;
@@ -68,6 +66,22 @@ public class GameManager : MonoBehaviour {
             z_Amount_ToSpawn += 10;            
             wave_Counter ++;
             SpawnEnemy(z_Amount_ToSpawn);
+        }
+    }
+
+    void GameOver() {
+        if (player.GetComponent<PlayerHP>().current_HP <= 0) {
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag(Tags.ENEMY);
+            for (int i = 0; i < enemies.Length; i++) {
+                enemies[i].GetComponent<EnemyController>().enabled = false;
+                enemies[i].GetComponent<EnemyController>().navAgent.isStopped = true;
+                enemies[i].GetComponent<EnemyController>().navAgent.velocity = Vector3.zero;
+                StopCoroutine("WaitBeforeSpawnEnemies");
+            }
+            player.GetComponent<PlayerMovement>().enabled = false;
+            player.GetComponent<WeaponManager>().GetCurrentSelectedWeapon().gameObject.SetActive(false);
+            player.GetComponent<PlayerAttack>().enabled = false;
+            player.GetComponentInChildren<PlayerFootsteps>().enabled = false;
         }
     }
 }

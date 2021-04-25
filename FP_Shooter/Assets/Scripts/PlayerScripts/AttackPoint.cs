@@ -22,7 +22,7 @@ public class AttackPoint : MonoBehaviour {
         hit = Physics.OverlapSphere(transform.position, weapon_Manager.GetCurrentSelectedWeapon().range, layer);
         if (hit.Length > 0) {
             Debug.Log("we hitt the" + hit[0].gameObject.name);
+            hit[0].gameObject.GetComponent<EnemyHealth>().ApplyDamage(weapon_Manager.GetCurrentSelectedWeapon().damage);
         }
     }
-
 }

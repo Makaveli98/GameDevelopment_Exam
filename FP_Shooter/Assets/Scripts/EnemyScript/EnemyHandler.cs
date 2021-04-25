@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAnimator : MonoBehaviour {
+public class EnemyHandler : MonoBehaviour {
 
     private Animator z_Anim;
+    
+    [SerializeField]
+    private GameObject z_Attack_Point_R, z_Attack_Point_L;
 
     private int z_Walk_Speed = 1;
     private int z_Run_Speed = 2;
@@ -43,6 +46,23 @@ public class EnemyAnimator : MonoBehaviour {
 
     public void Stop_Zombie_RunAnimation() {
         z_Anim.SetInteger(AnimationTags.ZOMBIE_SPEED, zero_Speed);
+    }
+
+    // gameobject
+    public void TurnOn_Z_AttackPoint_R() {
+        z_Attack_Point_R.SetActive(true);
+    }
+
+    public void TurnOff_Z_AttackPoint_R() {
+        z_Attack_Point_R.SetActive(false);
+    }
+
+    public void TurnOn_Z_AttackPoint_L() {
+        z_Attack_Point_L.SetActive(true);
+    }
+
+    public void TurnOff_Z_AttackPoint_L() {
+        z_Attack_Point_L.SetActive(false);
     }
 
 }

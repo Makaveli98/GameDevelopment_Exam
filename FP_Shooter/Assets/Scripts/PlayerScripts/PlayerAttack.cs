@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerAttack : MonoBehaviour {
 
@@ -8,6 +9,7 @@ public class PlayerAttack : MonoBehaviour {
     private CharacterController c_Controller;
     private PlayerSprintAndCrouch sprint_Crouch_Script;
     private PlayerMovement player_Movement_Script;
+    private GameObject crosshair;
 
     [SerializeField]
     private LayerMask layer;
@@ -23,6 +25,7 @@ public class PlayerAttack : MonoBehaviour {
         c_Controller = GetComponent<CharacterController>();
         sprint_Crouch_Script = GetComponent<PlayerSprintAndCrouch>();
         player_Movement_Script = GetComponent<PlayerMovement>();
+        crosshair = GameObject.Find("Crosshair");
     }
 
     void Update() {
@@ -35,6 +38,7 @@ public class PlayerAttack : MonoBehaviour {
         if (weapon_Manager.GetCurrentSelectedWeapon().weapon_Aim == WeaponAim.AIM) {
             if (Input.GetMouseButtonDown(1)) {
                 if (!is_Aiming) {
+                    crosshair.SetActive(false);
                     weapon_Manager.GetCurrentSelectedWeapon().PLay_Zoom_InAnimation();
                     weapon_Manager.GetCurrentSelectedWeapon().Play_IdleAnimation(false);
                     is_Aiming = true;
@@ -44,6 +48,7 @@ public class PlayerAttack : MonoBehaviour {
             
             if (Input.GetMouseButtonUp(1)) {
                 if (is_Aiming) {
+                    crosshair.SetActive(true);
                     weapon_Manager.GetCurrentSelectedWeapon().PLay_Zoom_OutAnimation();
                     weapon_Manager.GetCurrentSelectedWeapon().Play_IdleAnimation(true);
                     is_Aiming = false;

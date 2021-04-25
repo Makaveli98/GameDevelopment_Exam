@@ -7,11 +7,11 @@ public class EnemyHealth : MonoBehaviour {
     [SerializeField]
     private int max_Health;
 
-    private EnemyAnimator zombie_Anim;
+    private EnemyHandler zombie_Anim;
     private EnemyController controller_Script;
 
     void Awake() {
-        zombie_Anim = GetComponent<EnemyAnimator>();
+        zombie_Anim = GetComponent<EnemyHandler>();
         controller_Script = GetComponent<EnemyController>();
     }
 
@@ -34,7 +34,7 @@ public class EnemyHealth : MonoBehaviour {
 
     }
 
-    IEnumerator WaitBeforeDeactivateEnemy() {
+    public IEnumerator WaitBeforeDeactivateEnemy() {
         yield return new WaitForSeconds((float)1.5);
 
         Destroy(controller_Script.gameObject);

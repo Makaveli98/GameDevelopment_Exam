@@ -13,7 +13,7 @@ public class EnemyController : MonoBehaviour {
     [HideInInspector]
     public NavMeshAgent navAgent;
     private EnemyState enemy_State;
-    private EnemyAnimator z_Animator;
+    private EnemyHandler z_Animator;
     private Transform target;
 
     private float patrol_Speed = 0.5f, run_Speed = 4f;
@@ -31,7 +31,7 @@ public class EnemyController : MonoBehaviour {
     void Awake() {
         navAgent = GetComponent<NavMeshAgent>();
         target = GameObject.FindWithTag(Tags.PLAYER).transform;
-        z_Animator = GetComponent<EnemyAnimator>();
+        z_Animator = GetComponent<EnemyHandler>();
     }
     
 
