@@ -21,31 +21,31 @@ public class WeaponManager : MonoBehaviour {
             TurnOn_SelectedWeapon(0);
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2)) {
-            TurnOn_SelectedWeapon(1);
-        }
+        // if (Input.GetKeyDown(KeyCode.Alpha2)) {
+        //     TurnOn_SelectedWeapon(1);
+        // }
 
-        if (Input.GetKeyDown(KeyCode.Alpha3)) {
+        if (Input.GetKeyDown(KeyCode.Alpha2)) {
             TurnOn_SelectedWeapon(2);
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha4)) {
+        if (Input.GetKeyDown(KeyCode.Alpha3)) {
             TurnOn_SelectedWeapon(3);
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha5)) {
-            TurnOn_SelectedWeapon(4);
-        }
+        // if (Input.GetKeyDown(KeyCode.Alpha5)) {
+        //     TurnOn_SelectedWeapon(4);
+        // }
 
-        if (Input.GetKeyDown(KeyCode.Alpha6)) {
+        if (Input.GetKeyDown(KeyCode.Alpha4)) {
             TurnOn_SelectedWeapon(5);
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha7)) {
+        if (Input.GetKeyDown(KeyCode.Alpha5)) {
             TurnOn_SelectedWeapon(6);
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha8)) {
+        if (Input.GetKeyDown(KeyCode.Alpha6)) {
             TurnOn_SelectedWeapon(7);
         }
 
@@ -71,7 +71,7 @@ public class WeaponManager : MonoBehaviour {
     } 
 
 
-    // returns info about the weapon handler
+    // returns info about the weapon handler script
     public WeaponHandler GetCurrentSelectedWeapon() {
         return weapons[current_Weapon_Index];
     }

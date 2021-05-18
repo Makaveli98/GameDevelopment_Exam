@@ -20,9 +20,7 @@ public enum WeaponBulletType {
 public class WeaponHandler : MonoBehaviour {
     
     private Animator anim;
-
-    private Animator assaultRifle_Cam;
-    private Animator SMG_Cam, Crossbow_Cam, Handgun_Cam, Shotgun_Cam, snipertRifle_Cam;
+    private Animator assaultRifle_Cam, SMG_Cam, Crossbow_Cam, Handgun_Cam, Shotgun_Cam, snipertRifle_Cam;
 
     // private Animation animation;
     
@@ -33,10 +31,10 @@ public class WeaponHandler : MonoBehaviour {
     private AudioSource shoot_Sound, reload_Sound;
 
     [SerializeField]
-    private GameObject muzzle_Flash, attack_Point;
-    public GameObject bullet;
+    private GameObject attack_Point;
+    public ParticleSystem muzzleflash;
 
-
+    
     private PlayerMovement player_Move_Script;
     private PlayerSprintAndCrouch sprint_Crouch_Script;
     private PlayerAttack p_Attack_Script;
@@ -51,13 +49,16 @@ public class WeaponHandler : MonoBehaviour {
     private int crouch_Aim_Condition = 3, walk_Aim_Condition = 5;
     private float crouch_Aim_Speed = 1.5f, walk_Aim_Speed = 3f;
     public int range, damage;
+    public bool is_Reloading;
     
-    [SerializeField]
-    private int current_Ammo, max_Ammo, no_Ammo = 0;
+    // [SerializeField]
+    public int current_Ammo, max_Ammo;
+    public float reloadTime;
 
     void Awake() {
         anim = GetComponent<Animator>();
         shoot_Sound = GetComponent<AudioSource>();
+        // muzzleflash = GetComponent<ParticleSystem>();
 
         player_Move_Script = GetComponentInParent<PlayerMovement>();
         sprint_Crouch_Script = GetComponentInParent<PlayerSprintAndCrouch>();
@@ -75,6 +76,8 @@ public class WeaponHandler : MonoBehaviour {
         current_Ammo = max_Ammo;
 
     }
+
+
 
     // ANIMATION 
 
@@ -190,7 +193,7 @@ public class WeaponHandler : MonoBehaviour {
 
     // Sound 
 
-    void Play_ShootSound() {
+    public void Play_ShootSound() {
         shoot_Sound.Play();
     }
     
@@ -204,12 +207,8 @@ public class WeaponHandler : MonoBehaviour {
 
     // gameobjects
     
-    void Turn_MuzzleFlash_On() {
-        muzzle_Flash.SetActive(true);
-    }
-
-    void Turn_MuzzleFlash_Off() {
-        muzzle_Flash.SetActive(false);
+    public void Turn_MuzzleFlash_On() {
+        muzzleflash.Play();
     }
     
     void TurnOn_AttackPoint() {
@@ -221,43 +220,5 @@ public class WeaponHandler : MonoBehaviour {
     }
 
     // gameobjects - end
-
-    public void Reload() {
-        // if not reloading
-        if (!p_Attack_Script.is_Reloading) {
-            // and is shooting
-            if (p_Attack_Script.is_Shooting) {
-                // then decrease the current ammo
-                current_Ammo --;
-                // if current ammo is less or equel to 0
-                if (current_Ammo <= no_Ammo) {
-                    // then put reloading to true
-                    p_Attack_Script.is_Reloading = true;
-                    Debug.Log("we are reloading");
-                    // play animation
-                    current_Ammo = max_Ammo;
-                    // after reloading put reload to false
-                    p_Attack_Script.is_Reloading = false;
-
-                } else if (current_Ammo < max_Ammo && Input.GetKey(KeyCode.R)) {
-                    p_Attack_Script.is_Reloading = true;
-                    Debug.Log("we are reloading while pressing R and shooting");
-
-                    current_Ammo = max_Ammo;
-
-                    p_Attack_Script.is_Reloading = false;
-                }
-            } else {
-                if (current_Ammo < max_Ammo && Input.GetKey(KeyCode.R)) {
-                    p_Attack_Script.is_Reloading = true;
-                    Debug.Log("we are reloading while pressing R and not shooting");
-
-                    current_Ammo = max_Ammo;
-
-                    p_Attack_Script.is_Reloading = false;
-                }
-            }
-        } 
-    }
 
 } // class

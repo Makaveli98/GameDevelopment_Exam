@@ -25,6 +25,7 @@ public class PlayerMouseLook : MonoBehaviour {
     void Start() {
 
         Cursor.lockState = CursorLockMode.Locked; // sets cursor on lock state
+        Cursor.visible = false;
     }
 
     void Update() {
@@ -41,6 +42,7 @@ public class PlayerMouseLook : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Escape)) {
             if (Cursor.lockState == CursorLockMode.Locked) {
                 Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
             } else {
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
@@ -49,17 +51,21 @@ public class PlayerMouseLook : MonoBehaviour {
     } // lock and unlock
 
     void LookAround() {
+        // same as with input key but now with the mouse
+        current_Mouse_Look = new Vector2(Input.GetAxisRaw(MouseAxis.MOUSE_Y), Input.GetAxisRaw(MouseAxis.MOUSE_X));
 
-        current_Mouse_Look = new Vector2(Input.GetAxisRaw(MouseAxis.MOUSE_Y), Input.GetAxisRaw(MouseAxis.MOUSE_X)); // same as with input key but now with the mouse
-
-        look_Angles.x += current_Mouse_Look.x * sensivity * (invert ? 1f : -1f); // this will move the gameobject down and up the x Axis (and if checked invert the look)
+        // this will move the gameobject down and up the x Axis (and if checked invert the look)
+        look_Angles.x += current_Mouse_Look.x * sensivity * (invert ? 1f : -1f);
         look_Angles.y += current_Mouse_Look.y * sensivity; 
 
-        look_Angles.x = Mathf.Clamp(look_Angles.x, default_Look_Limits.x, default_Look_Limits.y); // this wil give the Vector2, look_Angles.x, a limit to rotate at
+        // this wil give the Vector2, look_Angles.x, a limit to rotate at
+        look_Angles.x = Mathf.Clamp(look_Angles.x, default_Look_Limits.x, default_Look_Limits.y);
 
-
-        lookRotation.localRotation = Quaternion.Euler(look_Angles.x, 0f, 0f); // this will rotate what is put in the Transform field
-        playerRotation.localRotation = Quaternion.Euler(0f, look_Angles.y, 0f); // this will rotate what is put in the Transform field
+        // this will rotate what is put in the Transform field
+        lookRotation.localRotation = Quaternion.Euler(look_Angles.x, 0f, 0f); 
+        
+        // this will rotate what is put in the Transform field
+        playerRotation.localRotation = Quaternion.Euler(0f, look_Angles.y, 0f);
         
     } // look around
 

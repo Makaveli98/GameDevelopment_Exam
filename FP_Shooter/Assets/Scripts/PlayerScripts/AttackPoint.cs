@@ -19,8 +19,11 @@ public class AttackPoint : MonoBehaviour {
     }
 
     void Attack() {
+        // checks if the sphere is overlapping within the given values
         hit = Physics.OverlapSphere(transform.position, weapon_Manager.GetCurrentSelectedWeapon().range, layer);
+        // if the overlapping gameobjects are greater than 0
         if (hit.Length > 0) {
+            // Then apply damage to the gameobject at the given index in the array
             Debug.Log("we hitt the" + hit[0].gameObject.name);
             hit[0].gameObject.GetComponent<EnemyHealth>().ApplyDamage(weapon_Manager.GetCurrentSelectedWeapon().damage);
         }

@@ -43,14 +43,20 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void MoveThePlayer() {
-        move_Direction = new Vector3(Input.GetAxis(Axis.HORIZONTAL), 0f, Input.GetAxis(Axis.VERTICAL)); // this will move the gameobject (player) down the x and z axis
+        // this will move the gameobject (player) down the x and z axis
+        move_Direction = new Vector3(Input.GetAxis(Axis.HORIZONTAL), 0f, Input.GetAxis(Axis.VERTICAL));
 
-        move_Direction = transform.TransformDirection(move_Direction); // this will tell the gameobject to move from local space to world space
-        move_Direction *= speed * Time.deltaTime; // tells the gameobject at what speed it will move
+        // this will tell the gameobject to move from local space to world space
+        move_Direction = transform.TransformDirection(move_Direction);
 
-        ApllyGravity();  // applies gravity
+        // tells the gameobject at what speed it will move
+        move_Direction *= speed * Time.deltaTime; 
+
+        // applies gravity
+        ApllyGravity();
         
-        character_Controller.Move(move_Direction); // and this will make the gameobject actually move
+        // and this will make the gameobject actually move
+        character_Controller.Move(move_Direction);
 
 
         // if not jumping
@@ -108,13 +114,15 @@ public class PlayerMovement : MonoBehaviour {
     } // move player
 
     void ApllyGravity() {
-        
-        vertical_Velocity -= gravity * Time.deltaTime; // whatever the number is (now none) minus gravity BUT
+        // whatever the number is (now none) minus gravity BUT
+        vertical_Velocity -= gravity * Time.deltaTime; 
         
         //jump
-        PlayerJump(); // if you jump THEN
+        // if you jump THEN
+        PlayerJump(); 
 
-        move_Direction.y = vertical_Velocity * Time.deltaTime; // the vector 3 Y axis will go down from the given number at gravity
+        // the vector 3 Y axis will go down from the given number at gravity
+        move_Direction.y = vertical_Velocity * Time.deltaTime;
 
     }  // apply gravity
 
